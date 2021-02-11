@@ -3,12 +3,29 @@ const quoteText = document.getElementById('quote')
 const authorText = document.getElementById('author')
 const twitterBtn = document.getElementById('twitter')
 const newQuoteBtn = document.getElementById('new-quote')
+const loader = document.getElementById('loader')
+
+
+//Show Loading
+function loading() {
+    loader.hidden = false //hidden is a property on all HTML elements, if false want to show it
+    quoteContainer.hidden = true //hide the quoteContainer
+}
+
+//Hide Loading
+function complete() {
+    if(!loader.hidden){ //loader.hidden === false
+        quoteContainer.hidden = false
+        loader.hidden = true
+    }
+}
 
 
 
 
 // Get Quote From API
 async function getQuote() {
+    loading()
     const proxyUrl = 'https://proxy-server-aka.herokuapp.com/'
     // API Url/query. Query begins with a ? and using & for more than 1 query
     const apiUrl = 'http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json';
@@ -28,6 +45,12 @@ async function getQuote() {
             quoteText.classList.remove('long-quote') //classList.remove will remove a className 
         }
         quoteText.innerText = data.quoteText;
+
+        //Delay the complete by 1sec, complete is a callback in setTimeout
+        setTimeout(complete, 1000);
+        
+        // Stop Loader, Show Quote
+        // complete()
     } catch(error) {
         getQuote(); //Get another new quote if error 
     }
@@ -52,6 +75,7 @@ twitterBtn.addEventListener('click', tweetQuote) //tweetQuote callback
 
 // On Page Load
 getQuote()
+loading()
 
 
 
