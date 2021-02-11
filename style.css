@@ -30,7 +30,7 @@ body{
 }
 
 .quote-text{
-    font-size: 2.75rem; /* responsive design, relative size compare to root element, default 16px */ 
+    font-size: 2.75rem; /* rem, responsive design, relative size compare to root element, default 16px */ 
 }
 
 .long-quote{
@@ -73,7 +73,7 @@ button:hover {
 }
 
 button:active {
-    transform: translate(0, 0.3rem); /* H, V, effect being press down onto the page */
+    transform: translate(0, 0.3rem); /* Hor, Ver, effect being press down onto the page */
     box-shadow: 0 0.1rem rgba(255, 255, 255, 0.8);
 }
 
